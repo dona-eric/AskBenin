@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  # Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8000
+    depends_on:
+      - api
+    networks:
+      - askbenin
+    volumes:
+      - ./app:/app/app
+      - ./components:/app/components
+      - ./lib:/app/lib
+      - ./types:/app/types
+
+  # Backend API
+  api:
+    image: python:3.13-slim
+    working_dir: /app
+    command: bash -c "pip install -r requirements.txt && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    ports:
+      - "8000:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - OPEN_ROUTER_API_KEY=${OPEN_ROUTER_API_KEY}
+    volumes:
+      - ../app:/app
+      - ../data:/data
+    networks:
+      - askbenin
+    depends_on:
+      - frontend
+
+networks:
+  askbenin:
+    driver: bridge
+
+volumes:
+  node_modules:
+  .next:

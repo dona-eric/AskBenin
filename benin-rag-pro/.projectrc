@@ -1,0 +1,28 @@
+{
+  "name": "AskBenin",
+  "description": "Plateforme d'IA RAG Agentic pour la communauté béninoise",
+  "author": "Donerick Wadagni",
+  "repository": "https://github.com/donerick/askbenin",
+  "license": "MIT",
+  "version": "2.0.0",
+  "keywords": [
+    "benin",
+    "ia",
+    "rag",
+    "chat",
+    "audio",
+    "culture",
+    "patrimoine"
+  ],
+  "scripts": {
+    "setup": "bash install.sh",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "deploy": "bash deploy.sh",
+    "docker:build": "docker build -t askbenin-frontend .",
+    "docker:run": "docker run -p 3000:3000 askbenin-frontend",
+    "docker:compose": "docker-compose up"
+  }
+}
