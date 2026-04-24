@@ -1,67 +1,56 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import {
-  ArrowRight,
-  Sparkles,
-  Mic,
-  MessageSquare,
-  Zap,
-  Globe,
-  Brain,
-  Music,
-  BookOpen,
-  Users,
-} from 'lucide-react';
+import {ArrowRight, Sparkles, Mic, MessageSquare, Globe, Brain, BookOpen, Users,} from 'lucide-react';
 
 const BENIN_WORDS = [
-  'Connaissance',
-  'Culture',
-  'Traditions',
-  'Patrimoine',
-  'Sagesse',
-  'Futur',
-  'Communauté',
-  'Innovation',
+  'la Connaissance',
+  'la Culture',
+  'les Traditions',
+  'le Patrimoine',
+  'la Sagesse',
+  'le Futur',
+  'la Communauté',
+  "l'Innovation",
 ];
 
 const FEATURES = [
   {
     icon: MessageSquare,
     title: 'Chat Intelligent',
-    description: 'Posez vos questions en texte et obtenez des réponses instantanées',
+    description: 'Posez vos questions et obtenez des réponses instantanées',
     color: 'from-blue-500 to-cyan-500',
   },
   {
     icon: Mic,
     title: 'Audio Avancé',
-    description: 'Parlez et écoutez les réponses avec visualisation d\'ondes',
+    description: 'Discutez avec AskBenin dans votre langue préférée',
     color: 'from-purple-500 to-pink-500',
   },
   {
     icon: Brain,
-    title: 'IA Agentic',
-    description: 'Agents IA intelligents pour répondre vos questions complexes',
+    title: 'IA AskBenin',
+    description: 'Votre Assistant IA qui réponds à toutes vos questions sur le Bénin',
     color: 'from-green-500 to-emerald-500',
   },
   {
     icon: Globe,
-    title: 'Base de Connaissance Bénin',
-    description: 'Accédez au patrimoine culturel et aux traditions béninoise',
+    title: 'Base de Connaissance Enrichissante',
+    description: 'Accédez au patrimoine culturel et aux traditions béninoises',
     color: 'from-orange-500 to-red-500',
   },
   {
     icon: BookOpen,
     title: 'Documentation Riche',
-    description: 'Explorez des guides complets et des tutoriels détaillés',
+    description: 'Explorez des guides complets et des tutoriels détaillés sur notre chère Pays le Bénin',
     color: 'from-indigo-500 to-blue-500',
   },
   {
     icon: Users,
     title: 'Communauté Active',
-    description: 'Connectez-vous avec d\'autres utilisateurs et contributeurs',
+    description: "Connectez-vous avec d'autres utilisateurs et contributeurs",
     color: 'from-yellow-500 to-orange-500',
   },
 ];
@@ -71,13 +60,13 @@ const CATEGORIES = [
     name: 'Histoire',
     icon: '📚',
     color: 'bg-amber-100',
-    description: 'L\'histoire riche du Bénin',
+    description: "L'histoire riche du Bénin",
   },
   {
     name: 'Traditions',
     icon: '🎭',
     color: 'bg-rose-100',
-    description: 'Les traditions et coutumes béninoise',
+    description: 'La culture, la tradition et coutumes béninoise',
   },
   {
     name: 'Art & Musique',
@@ -201,8 +190,7 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="flex justify-center"
-            >
+              className="flex justify-center">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-benin-600 to-gold-500 rounded-2xl blur-2xl opacity-30"></div>
                 <div className="relative bg-gradient-benin p-3 xs:p-4 rounded-xl xs:rounded-2xl">
@@ -216,14 +204,14 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-benin-900 leading-tight">
-                Découvrez le
+              <h1 className="text-3xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-benin-900 leading-tight">
+                Découvrez
                 <br />
                 <span className="gradient-text">
                   {BENIN_WORDS[wordIdx]}
                 </span>
                 <br />
-                Béninois
+                Béninoise
               </h1>
             </motion.div>
 
@@ -234,7 +222,7 @@ export default function HomePage() {
               transition={{ duration: 0.5 }}
               className="text-sm xs:text-base sm:text-lg md:text-xl text-benin-600 max-w-2xl mx-auto px-2"
             >
-              Explorez le patrimoine, les traditions et la sagesse béninoise à travers une
+              Explorez le patrimoine,les cultures, les traditions et la sagesse béninoise à travers une
               plateforme d'IA révolutionnaire
             </motion.p>
 

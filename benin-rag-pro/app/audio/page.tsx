@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sidebar } from '@components/Sidebar';
 import { AudioRecorder } from '@components/AudioRecorder';
 import { AudioVisualizer } from '@components/AudioVisualizer';
-import { Notification } from '@components/Notification';
+import { Notification } from '@components/Notification'
 import { useAudioStore } from '@lib/store';
 import { Menu, Headphones, Volume2 } from 'lucide-react';
 
@@ -63,7 +63,7 @@ export default function AudioPage() {
               className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-8 border border-benin-200 sm:border-2 shadow-md sm:shadow-lg"
             >
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <Volume2 className="text-gold-500 flex-shrink-0" size={20} className="sm:w-6 sm:h-6" />
+                <Volume2 className="text-gold-500 flex-shrink-0 sm:w-6 sm:h-6" size={20}/>
                 <h3 className="text-lg sm:text-xl font-bold text-benin-900">Visualisation d'Ondes</h3>
               </div>
               <AudioVisualizer />

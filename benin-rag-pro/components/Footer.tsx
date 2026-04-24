@@ -51,16 +51,16 @@ export const Footer: React.FC = () => {
               <h3 className="font-bold text-lg xs:text-xl">AskBenin</h3>
             </div>
             <p className="text-benin-300 text-xs xs:text-sm">
-              Plateforme d'IA RAG dédiée à la connaissance, la culture et le patrimoine béninois.
+              Plateforme d'IA dédiée à la connaissance, la culture et le patrimoine béninois.
             </p>
             <div className="flex gap-2 xs:gap-3">
-              <a href="#" className="p-2 bg-benin-800 hover:bg-gold-500 rounded-lg transition-colors flex-shrink-0">
+              <a href="https://facebook.com/askbenin" className="p-2 bg-benin-800 hover:bg-gold-500 rounded-lg transition-colors flex-shrink-0">
                 <Facebook size={16} className="xs:w-4.5 xs:h-4.5" />
               </a>
-              <a href="#" className="p-2 bg-benin-800 hover:bg-gold-500 rounded-lg transition-colors flex-shrink-0">
+              <a href="https://x.com/@askbenin" className="p-2 bg-benin-800 hover:bg-gold-500 rounded-lg transition-colors flex-shrink-0">
                 <Twitter size={16} className="xs:w-4.5 xs:h-4.5" />
               </a>
-              <a href="#" className="p-2 bg-benin-800 hover:bg-gold-500 rounded-lg transition-colors flex-shrink-0">
+              <a href="wwww.linkedin.com/in/askbenin" className="p-2 bg-benin-800 hover:bg-gold-500 rounded-lg transition-colors flex-shrink-0">
                 <Linkedin size={16} className="xs:w-4.5 xs:h-4.5" />
               </a>
             </div>
@@ -103,8 +103,8 @@ export const Footer: React.FC = () => {
               <Phone size={16} className="text-gold-500 mt-0.5 xs:mt-1 flex-shrink-0 w-4 xs:w-5 h-4 xs:h-5" />
               <div className="min-w-0">
                 <p className="text-xs xs:text-sm text-benin-300">Téléphone</p>
-                <a href="tel:+22961234567" className="text-gold-400 hover:text-gold-300 transition-colors text-xs xs:text-sm">
-                  +229 6123 4567
+                <a href="tel:+2290141730240" className="text-gold-400 hover:text-gold-300 transition-colors text-xs xs:text-sm">
+                  +229 0141 7302 40
                 </a>
               </div>
             </div>

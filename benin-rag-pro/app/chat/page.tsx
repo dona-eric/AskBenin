@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Sidebar } from '@components/Sidebar';
 import { ChatWindow } from '@components/ChatWindow';
 import { Menu } from 'lucide-react';
-import { useUIStore } from '@lib/store';
 
 export default function ChatPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -25,7 +23,7 @@ export default function ChatPage() {
           >
             <Menu size={20} />
           </button>
-          <h1 className="text-lg sm:text-2xl font-bold text-benin-900 truncate">Chat avec AskBenin</h1>
+          <h1 className="text-lg sm:text-2xl font-bold text-benin-900 truncate">AskBenin</h1>
         </div>
 
         {/* Chat Window */}

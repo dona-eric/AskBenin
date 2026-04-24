@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Mic, Square, Play, Pause, Trash2 } from 'lucide-react';
+import {useRef, useState } from 'react';
+import { Mic, Square, Play, Pause, Trash2, Loader, Send } from 'lucide-react';
 import { useAudioStore } from '@lib/store';
 import { apiClient } from '@lib/api';
 import clsx from 'clsx';
@@ -11,19 +11,7 @@ export const AudioRecorder: React.FC = () => {
   const audioChunksRef = useRef<Blob[]>([]);
   const audioElementRef = useRef<HTMLAudioElement>(null);
   
-  const {
-    isRecording,
-    isPlaying,
-    isTranscribing,
-    audioURL,
-    setRecording,
-    setPlaying,
-    setTranscribing,
-    setAudioURL,
-    setWaveformData,
-    setError,
-    reset,
-  } = useAudioStore();
+  const {isRecording,isPlaying,isTranscribing,audioURL,setRecording,setPlaying,setTranscribing,setAudioURL,setError,reset} = useAudioStore();
 
   const [recordingTime, setRecordingTime] = useState(0);
   let recordingInterval: NodeJS.Timeout;

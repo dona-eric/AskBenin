@@ -10,8 +10,8 @@ const Markdown = lazy(() => import('react-markdown'));
 
 const MODELS = [
   { id: 'mixtral-8x7b-32768', name: 'Mixtral 8x7B', provider: 'groq' },
-  { id: 'qwen/qwen3-32b', name: 'Qwen 3 32B', provider: 'groq' },
-  { id: 'gpt-oss-20b:free', name: 'GPT OSS 20B', provider: 'openrouter' },
+  { id: 'qwen/qwen3-32b', name: 'Qwen3-32B', provider: 'groq' },
+  { id: 'gpt-oss-120b', name: 'GPT-OSS', provider: 'groq' },
 ];
 
 export const ChatWindow: React.FC = () => {
@@ -19,14 +19,7 @@ export const ChatWindow: React.FC = () => {
   const [selectedModel, setSelectedModel] = useState(MODELS[0]);
   const [showModelMenu, setShowModelMenu] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const {
-    messages,
-    isLoading,
-    error,
-    addMessage,
-    setLoading,
-    setError,
-  } = useChatStore();
+  const {messages,isLoading,error,addMessage,setLoading,setError} = useChatStore();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
