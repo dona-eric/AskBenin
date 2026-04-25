@@ -9,20 +9,22 @@ load_dotenv()
     #ENV VARIABLES
 # =========================
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 QDRANT_URL=os.getenv('QDRANT_URL')
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 OPEN_ROUTER_KEY=os.getenv('OPEN_ROUTER_KEY')
+TAVILY_KEY=os.getenv('TAVILY_KEY')
+
+
 COLLECTION_NAME ="wadagni"
 EMBEDDING_MODEL ="sentence-transformers/all-MiniLM-L6-v2"
-EMBEDDING_MODEL_ROUTER="nvidia/llama-nemotron-embed-vl-1b-v2:free"
 GROQ_MODEL_NAME=["gpt-oss-120b", "gpt-oss-20b", "qwen/qwen3-32b"]
-OPEN_ROUTER_MODEL=["openai/gpt-oss-20b:free"]
+OPENAI_MODEL_NAME=['gpt-5.4', "gpt-5.4-mini", "gpt-5.4-nanoo"]
 MODEL_AUDIO_TO_TEXT = "whisper-large-v3-turbo"
 
 # =========================
 #  LOGGING CONFIG
-# =========================
-
+# ========================
 LOG_DIR = "logs"
 LOG_FILE = os.path.join(LOG_DIR, "app.log")
 
