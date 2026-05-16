@@ -10,7 +10,7 @@ def get_llm(llm_provider, model):
     try:
         if llm_provider == "GROQ":
             if not GROQ_API_KEY:
-                raise ValueError.error("GROQ API KEY not exists")
+                raise ValueError("GROQ API KEY not exists")
             return ChatGroq(
                 model=model, 
                 api_key=GROQ_API_KEY,

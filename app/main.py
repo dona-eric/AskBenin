@@ -29,7 +29,12 @@ app.add_middleware(
 
 logger.info(msg="================ CREATE ROUTER =============")
 
-client = Groq(api_key=GROQ_API_KEY)
+try:
+    client = Groq(api_key=GROQ_API_KEY)
+except Exception as e:
+    logger.warning(f"Groq client could not be initialized: {e}")
+    client = None
+
 @app.post("/chat")
 def chat_endpoint(request: RequestState):
     
@@ -84,13 +89,15 @@ async def post_audio_to_text(file: UploadFile = File(...)):
 
     text_query = transcription.text
     response_user = chain_rag(
-        provider="groq",
+        provider="GROQ",
         query=text_query,
         llm_id=GROQ_MODEL_NAME[2]
     )
 
     return {
-        "response": response_user
+        "question_text": text_query,
+        "response_text": response_user,
+        "audio_url": ""
         }
     
 @app.get("/")

@@ -1,6 +1,6 @@
 from app.config import logger
 from app.rag.generator import get_llm
-from app.rag.retriever import retriever_tool
+from app.tools.tool_retriever import retriever_tool
 from app.rag.prompt_builder import PromptBuilder
 from langgraph.prebuilt import create_react_agent
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
@@ -20,10 +20,19 @@ def chain_rag(provider, query, llm_id):
         tools = [retriever_tool]
     )
     
+    # query peut être une liste de messages ou une chaîne brute
+    human_query = query[-1] if isinstance(query, list) else query
+
+    # On récupère quelques documents pour le contexte
+    from app.rag.retriever import qdrant_search
+    docs = qdrant_search(human_query)
+
+    prompt = PromptBuilder.build_prompt(human_query, docs)
+
     state = {
         "messages":[
-            SystemMessage(content=PromptBuilder.SYSTEM_PROMPT),
-            HumanMessage(content=query[-1])
+            SystemMessage(content=prompt),
+            HumanMessage(content=human_query)
         ]
     }
 
