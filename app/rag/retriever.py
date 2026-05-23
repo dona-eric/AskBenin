@@ -8,15 +8,18 @@ from app.ingestion.detector import HEADERS, FALLBACK_URLS
 from typing import Optional
 from bs4 import BeautifulSoup
 from tavily import TavilyClient
-from langchain_qdrant import QdrantVectorStore
+from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
 from qdrant_client import QdrantClient
-from qdrant_client.http.models import Distance, VectorParams
+from qdrant_client.http.models import Distance, VectorParams, SparseVectorParams, SparseIndexParams,Filter, FieldCondition, MatchValue
 from langchain_core.documents import Document
 from app.config import (
     logger,
     TAVILY_KEY, OPENAI_API_KEY
 ) 
 
+from functools import lru_cache
+
+@lru_cache(maxsize=1)
 def get_vector_store() -> QdrantVectorStore:
     client = QdrantClient(
         url=QDRANT_URL,
@@ -31,14 +34,30 @@ def get_vector_store() -> QdrantVectorStore:
     if COLLECTION_NAME not in existing:
         client.create_collection(
             collection_name=COLLECTION_NAME,
-            vectors_config=VectorParams(size=384, distance=Distance.COSINE),
+            vectors_config={
+                "dense": VectorParams(
+                    size=384, distance=Distance.COSINE
+                    )
+                },
+            sparse_vectors_config={
+                "sparse": SparseVectorParams(
+                    index=SparseIndexParams(
+                        on_disk=False
+                        )
+        )
+    }
         )
         logger.info(f"[Qdrant] Collection '{COLLECTION_NAME}' créée.")
  
+    sparse_embeddings = FastEmbedSparse(model_name="Qdrant/bm25")
+    
     return QdrantVectorStore(
         client=client,
         collection_name=COLLECTION_NAME,
         embedding=embeddings,
+        sparse_embedding=sparse_embeddings,
+        retrieval_mode= RetrievalMode.HYBRID,
+        sparse_vector_name="sparse",
     )
  
 
@@ -108,8 +127,6 @@ def web_fetch_and_ingest(query: str, domaine: str) -> list[Document]:
  
     # 1. Tavily deep search
     raw_docs = fetch_tavily(query, domaine)
-    spliter = splitter_docs(docs= raw_docs)
-
     # 2. Fallback scraping si Tavily insuffisant
     if len(raw_docs) < 2:
         logger.warning(f"[WebFetch] Tavily insuffisant ({len(raw_docs)}) → scraping")
@@ -123,7 +140,7 @@ def web_fetch_and_ingest(query: str, domaine: str) -> list[Document]:
         return []
  
     # 3. Chunking
-    chunks = spliter.split_documents(raw_docs)
+    chunks = splitter_docs(raw_docs)
     logger.info(f"[WebFetch] {len(chunks)} chunks générés")
  
     # 4. Injection Qdrant (enrichit la base pour les prochaines requêtes)
@@ -131,13 +148,36 @@ def web_fetch_and_ingest(query: str, domaine: str) -> list[Document]:
  
     return chunks
 
-def qdrant_search(query: str, k: int = 4) -> list[Document]:
+def qdrant_search(query: str,
+    k: int = 3,
+    fetch_k: int = 10,
+    domaine: str = None,
+    search_type: str = "mmr",
+    lambda_mult: float = 0.7) -> list[Document]:
     """Recherche dans Qdrant, retourne [] si collection vide ou erreur."""
+    search_kwargs = {
+        "k": k,
+        "fetch_k": fetch_k,
+        "lambda_mult": lambda_mult,
+    }
+
+    if domaine and domaine != "general":
+        search_kwargs["filter"] = Filter(
+            must=[FieldCondition(
+                key="metadata.domaine",
+                match=MatchValue(value=domaine)
+            )]
+        )
+    vector_store = get_vector_store()
+    retriever = vector_store.as_retriever(
+        search_type=search_type,
+        search_kwargs=search_kwargs,
+    )
+
     try:
-        vectore_store = get_vector_store()
-        return vectore_store.similarity_search(query, k=k)
+        return retriever.invoke(query)
     except Exception as e:
-        logger.warning(f"[Qdrant] Recherche échouée: {e}")
+        logger.error(f"[Qdrant] Erreur search: {e}")
         return []
  
  

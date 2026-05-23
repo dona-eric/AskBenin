@@ -1,7 +1,6 @@
-from app.config import logger, GROQ_API_KEY, OPEN_ROUTER_KEY
+from app.config import OPENAI_API_KEY, logger, GROQ_API_KEY
 from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
-
 logger.info ("================== MODÈLES GENERATEUR===============")
 
 
@@ -17,14 +16,14 @@ def get_llm(llm_provider, model):
                 temperature=0.2
                 )
         
-        elif llm_provider == "OPEN_ROUTER":
-            if not OPEN_ROUTER_KEY:
+        elif llm_provider == "OPENAI":
+            if not OPENAI_API_KEY:
                 raise ValueError("open router api key not eexist")
 
             return ChatOpenAI(
                 model=model,
-                api_key=OPEN_ROUTER_KEY,
-                base_url="https://openrouter.ai/api/v1",
+                api_key=OPENAI_API_KEY,
+                base_url="https://build.lewisnote.com/v1",
                 default_headers={
                     "HTTP-Referer": "http://localhost:8000",
                     "X-Title": "Benin-GPT-Assistant"

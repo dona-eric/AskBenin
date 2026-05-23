@@ -1,7 +1,7 @@
 """
 askbeinn_agent.py
 ─────────────────────────────────────────────────────────────
-Agent principal Askbeinn.
+Agent principal Askbeinn (Refondu avec LangGraph).
  
 Flux :
   1. Détection automatique du domaine + langue
@@ -12,11 +12,10 @@ Flux :
                               → re-query Qdrant
   4. LLM synthétise la réponse finale
  
-Stack : LangChain · Qdrant · HuggingFace · OpenAI Afri · Tavily
+Stack : LangGraph · LangChain · Qdrant · HuggingFace · OpenAI Afri · Tavily
 """
  
 import re
-import os
 from typing import Optional
 from app.config import (
     logger,
@@ -24,19 +23,18 @@ from app.config import (
 ) 
 from app.ingestion.detector import detect_domaine, detect_langue
 from app.tools.tool_retriever import retriever_tool, web_search_tool
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.messages import HumanMessage, AIMessage
-from langchain_classic.agents import AgentExecutor
-from langchain_classic.agents import create_tool_calling_agent
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
- 
 
+from langgraph.graph import StateGraph, START, END, MessagesState
+from langgraph.prebuilt import ToolNode, tools_condition
+from langgraph.checkpoint.memory import MemorySaver
 
 # ══════════════════════════════════════════════════════════════
-# 5.  PROMPT SYSTÈME
+# PROMPT SYSTÈME
 # ══════════════════════════════════════════════════════════════
  
-SYSTEM_PROMPT = """Tu es Askbeinn, l'assistant expert sur le Bénin.
+SYSTEM_PROMPT = """Tu es AskBenin, l'assistant expert sur le Bénin.
 Tu fournis des informations précises, fiables et actualisées sur tous les domaines :
 santé, éducation, agriculture, économie, finance, politique, gouvernance,
 numérique, startups, innovation, tourisme, culture, environnement,
@@ -61,66 +59,87 @@ Format de réponse :
 - Sources citées en fin de réponse
 """
  
- 
 # ══════════════════════════════════════════════════════════════
-# 6.  CONSTRUCTION DE L'AGENT
+# CONSTRUCTION DU GRAPHE LANGGRAPH
 # ══════════════════════════════════════════════════════════════
- 
-def build_agent() -> AgentExecutor:
+
+# Mémoire globale en mémoire vive pour sauvegarder l'état des threads (sessions)
+memory = MemorySaver()
+
+def build_agent():
     """
-    Construit et retourne l'AgentExecutor Askbeinn.
-    À appeler une seule fois au démarrage (ex: dans main.py ou lifespan FastAPI).
+    Construit et retourne le graphe compilé Askbeinn.
     """
-    # LLM principal — OpenAI Afri (compatible OpenAI SDK)
     llm = ChatOpenAI(
         model="gpt-5.4",
-        base_url="https://build.lewisnote.com/v1",               # remplacer par le modèle Afri exact
+        base_url="https://build.lewisnote.com/v1",
         api_key=OPENAI_API_KEY,
         temperature=0.2,  
         streaming=True,
     )
  
     tools = [retriever_tool, web_search_tool]
+    llm_with_tools = llm.bind_tools(tools)
  
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", SYSTEM_PROMPT),
-        MessagesPlaceholder("chat_history", optional=True),
-        ("human", "{input}"),
-        MessagesPlaceholder("agent_scratchpad"),
-    ])
- 
-    agent = create_tool_calling_agent(llm=llm, tools=tools, prompt=prompt)
- 
-    executor = AgentExecutor(
-        agent=agent,
-        tools=tools,
-        verbose=True,                     # logs des étapes (désactiver en prod)
-        max_iterations=5,                 # évite les boucles infinies
-        handle_parsing_errors=True,
-        return_intermediate_steps=False,
+    def call_model(state: MessagesState):
+        messages = state["messages"]
+        sys_msg = SystemMessage(content=SYSTEM_PROMPT)
+        
+        # S'assurer que le prompt système est au début
+        if messages and isinstance(messages[0], SystemMessage):
+            msgs = messages
+        else:
+            msgs = [sys_msg] + messages
+            
+        response = llm_with_tools.invoke(msgs)
+        return {"messages": [response]}
+        
+    # Création du graphe d'états
+    graph_builder = StateGraph(MessagesState)
+    
+    # Nœud LLM
+    graph_builder.add_node("agent", call_model)
+    
+    # Nœud Outils
+    tool_node = ToolNode(tools)
+    graph_builder.add_node("tools", tool_node)
+    
+    # Arêtes
+    graph_builder.add_edge(START, "agent")
+    
+    # Arête conditionnelle : si l'agent appelle un outil, aller à 'tools', sinon s'arrêter
+    graph_builder.add_conditional_edges(
+        "agent", 
+        tools_condition, 
+        {"tools": "tools", END: END}
     )
- 
-    logger.info("[Askbeinn] Agent initialisé")
-    return executor
+    
+    # Après les outils, retourner à l'agent
+    graph_builder.add_edge("tools", "agent")
+    
+    # Compilation avec le gestionnaire de mémoire
+    compiled_graph = graph_builder.compile(checkpointer=memory)
+    
+    logger.info("[Askbeinn] Agent LangGraph initialisé")
+    return compiled_graph
  
  
 # ══════════════════════════════════════════════════════════════
-# 7.  CLASSE PRINCIPALE  (interface propre pour FastAPI / CLI)
+# CLASSE PRINCIPALE (interface propre pour FastAPI / CLI)
 # ══════════════════════════════════════════════════════════════
  
 class AskbeninAgent:
     """
-    Interface de haut niveau autour de l'AgentExecutor.
+    Interface de haut niveau autour du StateGraph LangGraph.
  
     Usage :
         agent = AskbeninAgent()
-        response = agent.ask("Combien d'écoles primaires au Bénin en 2023 ?")
+        response = agent.ask("Combien d'écoles primaires au Bénin en 2023 ?", session_id="user_123")
         print(response["answer"])
     """
  
     def __init__(self):
-        self._executor = build_agent()
-        self._history: list[dict] = []          # historique de session
+        self._graph = build_agent()
  
     def ask(
         self,
@@ -129,34 +148,25 @@ class AskbeninAgent:
     ) -> dict:
         """
         Pose une question à l'agent et retourne la réponse structurée.
- 
-        Returns:
-            {
-                "answer": str,
-                "domaine": str,
-                "langue": str,
-                "sources": list[str],
-            }
         """
         domaine = detect_domaine(question)
         langue = detect_langue(question)
  
-        logger.info(f"[Ask] '{question}' | domaine={domaine} | langue={langue}")
+        logger.info(f"[Ask] '{question}' | domaine={domaine} | langue={langue} | session={session_id}")
+        
+        thread_id = session_id or "default_session"
+        config = {"configurable": {"thread_id": thread_id}}
  
         try:
-            result = self._executor.invoke({
-                "input": question,
-                "chat_history": self._history,
-            })
-            answer = result.get("output", "")
- 
-            # Mise à jour de l'historique de conversation
-            self._history.append(HumanMessage(content=question))
-            self._history.append(AIMessage(content=answer))
- 
-            # Garde les 10 derniers échanges en mémoire
-            if len(self._history) > 20:
-                self._history = self._history[-20:]
+            # Invocation du graphe d'états
+            result = self._graph.invoke(
+                {"messages": [HumanMessage(content=question)]},
+                config=config
+            )
+            
+            # Le dernier message est la réponse finale du modèle
+            messages = result.get("messages", [])
+            answer = messages[-1].content if messages else ""
  
             # Extraction basique des sources mentionnées dans la réponse
             sources = re.findall(r"https?://[^\s\]]+", answer)
@@ -177,9 +187,11 @@ class AskbeninAgent:
                 "sources": [],
             }
  
-    def reset_history(self) -> None:
-        """Réinitialise l'historique de conversation."""
-        self._history = []
-        logger.info("[Ask] Historique réinitialisé.")
- 
- 
+    def reset_history(self, session_id: str) -> None:
+        """
+        Réinitialise l'historique d'une conversation.
+        Dans LangGraph, avec MemorySaver, on ne peut pas supprimer un thread facilement,
+        mais on peut le réinitialiser en envoyant un état vide si nécessaire, 
+        ou simplement l'ignorer. Ici, la méthode est gardée pour compatibilité.
+        """
+        logger.info(f"[Ask] Reset history ignoré pour LangGraph (thread_id: {session_id}). Un nouveau thread_id crée une nouvelle session.")

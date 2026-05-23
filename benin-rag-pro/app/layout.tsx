@@ -1,28 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@components/Header";
-import { Footer } from "@components/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AskBenin - Plateforme IA RAG Agentic",
+  title: "AskBenin — Votre Assistant IA sur le Bénin",
   description:
-    "Découvrez le patrimoine, la culture et les traditions béninoise à travers une plateforme d'IA RAG intelligente et accessible.",
+    "Explorez le patrimoine, la culture, l'économie et les traditions béninoises à travers une plateforme d'intelligence artificielle moderne et accessible.",
   keywords: [
-    "Bénin",
-    "IA",
-    "RAG",
-    "Culture",
-    "Traditions",
-    "Patrimoine",
-    "Chat IA",
-    "Agent IA",
+    "Bénin", "IA", "RAG", "Culture", "Traditions", "Patrimoine",
+    "Chat IA", "Agent IA", "Afrique", "AskBenin",
   ],
   openGraph: {
-    title: "AskBenin - Plateforme IA RAG Agentic",
-    description: "Explorez le Bénin à travers l'intelligence artificielle",
+    title: "AskBenin — Votre Assistant IA sur le Bénin",
+    description: "Découvrez le Bénin à travers l'intelligence artificielle",
     type: "website",
   },
 };
@@ -32,6 +21,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
+  themeColor: "#080d19",
 };
 
 export default function RootLayout({
@@ -45,13 +35,11 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="AskBenin" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} bg-white text-benin-900 overflow-x-hidden`}>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-1 w-full">{children}</main>
-          <Footer />
-        </div>
+      <body className="bg-surface-950 text-surface-200 overflow-x-hidden font-sans">
+        {children}
       </body>
     </html>
   );

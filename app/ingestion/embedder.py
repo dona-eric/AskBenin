@@ -9,6 +9,9 @@ logger.info("================= EMBEDDING =============")
 
 token = os.getenv("HF_TOKEN")
 
+from functools import lru_cache
+
+@lru_cache(maxsize=1)
 def get_embedding_model():
     """
     Initialise le modèle d'embedding HuggingFace.

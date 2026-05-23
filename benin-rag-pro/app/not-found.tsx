@@ -1,90 +1,69 @@
 'use client';
 
-import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Home, Search } from 'lucide-react';
+import { Home, MessageSquare } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-benin-50 to-white flex items-center justify-center px-4">
+    <div className="min-h-screen bg-surface-950 flex items-center justify-center px-4 relative overflow-hidden">
+      {/* Background orbs */}
+      <div className="orb orb-gold w-[300px] h-[300px] top-1/4 -right-20" />
+      <div className="orb orb-green w-[250px] h-[250px] bottom-1/4 -left-20" />
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center max-w-md space-y-8"
+        className="text-center max-w-md space-y-8 relative z-10"
       >
         {/* 404 */}
-        <div className="space-y-2">
+        <div className="space-y-3">
           <motion.h1
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: 'spring' }}
-            className="text-9xl font-bold gradient-text"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+            className="text-8xl sm:text-9xl font-display font-extrabold gradient-text"
           >
             404
           </motion.h1>
-          <h2 className="text-4xl font-bold text-benin-900">Page non trouvée</h2>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-surface-100">
+            Page non trouvée
+          </h2>
         </div>
 
-        {/* Description */}
-        <p className="text-xl text-benin-600">
-          Oups! La page que vous recherchez n\'existe pas ou a été déplacée.
+        <p className="text-surface-400 text-base sm:text-lg leading-relaxed">
+          Oups ! La page que vous recherchez n'existe pas ou a été déplacée.
         </p>
 
-        {/* Search Box */}
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Chercher quelque chose..."
-            className="w-full px-4 py-3 border-2 border-benin-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-benin-500"
-          />
-          <button className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-gradient-benin rounded-lg text-white hover:shadow-lg transition-all">
-            <Search size={20} />
-          </button>
-        </div>
-
-        {/* Links */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-          <Link
-            href="/"
-            className="btn-primary inline-flex items-center gap-2 justify-center"
-          >
-            <Home size={20} />
-            Retour à l\'accueil
+        {/* Actions */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+          <Link href="/" className="btn-primary justify-center">
+            <Home size={18} />
+            Retour à l'accueil
           </Link>
-          <Link
-            href="/chat"
-            className="btn-secondary inline-flex items-center gap-2 justify-center"
-          >
+          <Link href="/chat" className="btn-secondary justify-center">
+            <MessageSquare size={18} />
             Poser une question
           </Link>
         </div>
 
-        {/* Suggestions */}
-        <div className="bg-benin-50 p-6 rounded-lg border border-benin-200 text-left">
-          <h3 className="font-bold text-benin-900 mb-3">Pages populaires</h3>
-          <ul className="space-y-2 text-benin-700">
-            <li>
-              <Link href="/" className="text-benin-600 hover:text-gold-600 transition-colors">
-                → Accueil
-              </Link>
-            </li>
-            <li>
-              <Link href="/chat" className="text-benin-600 hover:text-gold-600 transition-colors">
-                → Chat
-              </Link>
-            </li>
-            <li>
-              <Link href="/audio" className="text-benin-600 hover:text-gold-600 transition-colors">
-                → Audio
-              </Link>
-            </li>
-            <li>
-              <Link href="/docs" className="text-benin-600 hover:text-gold-600 transition-colors">
-                → Documentation
-              </Link>
-            </li>
+        {/* Popular pages */}
+        <div className="card-glass p-5 text-left">
+          <h3 className="font-display font-semibold text-surface-200 text-sm mb-3">Pages populaires</h3>
+          <ul className="space-y-2">
+            {[
+              { href: '/', label: 'Accueil' },
+              { href: '/chat', label: 'Chat IA' },
+              { href: '/audio', label: 'Mode Audio' },
+              { href: '/docs', label: 'Documentation' },
+            ].map((page) => (
+              <li key={page.href}>
+                <Link href={page.href} className="text-surface-400 hover:text-gold-400 transition-colors text-sm flex items-center gap-2">
+                  <span className="text-gold-500/50">→</span> {page.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </motion.div>

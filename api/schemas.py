@@ -13,3 +13,8 @@ class AudioRequestState(BaseModel):
     question_text: str
     response_text: str
     audio_url: str
+
+class QuestionRequest(BaseModel):
+    question: str
+    session_id: str = "default"
+ 

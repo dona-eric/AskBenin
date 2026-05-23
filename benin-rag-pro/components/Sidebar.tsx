@@ -1,9 +1,9 @@
 'use client';
-
 import React from 'react';
 import Link from 'next/link';
-import { Book, Headphones, MessageSquare, Home, Settings } from 'lucide-react';
+import { Plus, BookOpen, X, MessageSquare, Trash2 } from 'lucide-react';
 import clsx from 'clsx';
+import { useChatStore } from '@lib/store';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -11,104 +11,123 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
-  const menuItems = [
-    {
-      icon: Home,
-      label: 'Accueil',
-      href: '/',
-      description: 'Page d\'accueil',
-    },
-    {
-      icon: MessageSquare,
-      label: 'Chat',
-      href: '/chat',
-      description: 'Conversation IA',
-    },
-    {
-      icon: Headphones,
-      label: 'Audio',
-      href: '/audio',
-      description: 'Questions par audio',
-    },
-    {
-      icon: Book,
-      label: 'Documentation',
-      href: '/docs',
-      description: 'Guides et tutoriels',
-    },
-  ];
+  const { conversations, sessionId, loadSession, deleteSession, newSession } = useChatStore();
 
-  const resources = [
-    { id: 'database', label: 'Base de données', href: '#' },
-    { id: 'models', label: 'Modèles IA', href: '#' },
-    { id: 'history', label: 'Historique', href: '#' },
-    { id: 'settings-res', label: 'Paramètres', href: '#' },
-  ];
+  const handleNewChat = (e: React.MouseEvent) => {
+    e.preventDefault();
+    newSession();
+    onClose?.();
+  };
+
+  const handleLoadSession = (id: string) => {
+    loadSession(id);
+    onClose?.();
+  };
+
+  const handleDeleteSession = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
+    deleteSession(id);
+  };
 
   return (
     <>
-      {/* Sidebar Overlay */}
+      {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-40"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden z-40 animate-fade-in"
           onClick={onClose}
         />
       )}
 
-      {/* Sidebar */}
+      {/* Sidebar panel */}
       <aside
         className={clsx(
-          'fixed left-0 top-16 bottom-0 w-64 bg-white border-r border-benin-200 overflow-y-auto transition-transform duration-300 z-40 md:relative md:top-0 md:translate-x-0 md:w-56 lg:w-64',
+          'fixed left-0 top-0 bottom-0 w-72 z-50 flex flex-col transition-transform duration-300 ease-out',
+          'md:relative md:translate-x-0 md:w-64 lg:w-72',
           isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         )}
+        style={{
+          background: 'linear-gradient(180deg, #0c1220 0%, #080d19 100%)',
+          borderRight: '1px solid rgba(255,255,255,0.06)',
+        }}
       >
-        <div className="p-4 sm:p-6 space-y-6 sm:space-y-8">
-          {/* Main Menu */}
-          <nav className="space-y-2">
-            <h3 className="px-3 py-2 text-xs font-semibold text-benin-400 uppercase tracking-wider">
-              Principal
-            </h3>
-            {menuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="flex gap-3 px-3 py-2 rounded-lg hover:bg-benin-50 text-benin-700 hover:text-benin-900 transition-colors group"
-                onClick={onClose}
-              >
-                <item.icon size={20} className="text-benin-500 group-hover:text-gold-500 transition-colors" />
-                <div>
-                  <p className="font-medium text-sm">{item.label}</p>
-                  <p className="text-xs text-benin-400">{item.description}</p>
-                </div>
-              </Link>
-            ))}
-          </nav>
-
-          {/* Resources */}
-          <nav className="space-y-2">
-            <h3 className="px-3 py-2 text-xs font-semibold text-benin-400 uppercase tracking-wider">
-              Ressources
-            </h3>
-            {resources.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                className="block px-3 py-2 text-sm text-benin-600 hover:text-benin-900 hover:bg-benin-50 rounded-lg transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Settings */}
-          <div className="border-t border-benin-200 pt-6">
-            <a
-              href="#"
-              className="flex items-center gap-3 px-3 py-2 text-benin-700 hover:bg-benin-50 rounded-lg transition-colors"
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{ background: 'linear-gradient(135deg, #D4A017, #065f46)' }}
             >
-              <Settings size={20} className="text-benin-500" />
-              <span className="font-medium text-sm">Paramètres</span>
-            </a>
+            </div>
+            <span className="font-display font-bold text-surface-200 text-sm">AskBenin</span>
+          </div>
+          <button onClick={onClose} className="md:hidden p-1.5 rounded-lg text-surface-500 hover:text-surface-300 hover:bg-white/[0.06] transition-colors">
+            <X size={18} />
+          </button>
+        </div>
+
+        {/* New Chat */}
+        <div className="p-3">
+          <button
+            onClick={handleNewChat}
+            className="flex items-center gap-2.5 w-full px-3.5 py-2.5 rounded-xl text-sm font-medium text-gold-400 border border-gold-500/20 hover:bg-gold-500/10 transition-all duration-200"
+          >
+            <Plus size={16} />
+            Nouvelle conversation
+          </button>
+        </div>
+
+        {/* Sessions History */}
+        <div className="flex-1 overflow-y-auto no-scrollbar px-3 py-2">
+          {conversations.length > 0 && (
+            <div className="mb-4">
+              <p className="px-3 py-2 text-[10px] font-semibold text-surface-600 uppercase tracking-widest">
+                Historique
+              </p>
+              <div className="space-y-0.5 mt-1">
+                {conversations.map((conv) => (
+                  <div
+                    key={conv.id}
+                    onClick={() => handleLoadSession(conv.id)}
+                    className={clsx(
+                      "flex items-center justify-between px-3 py-2.5 rounded-xl text-sm transition-all duration-200 cursor-pointer group",
+                      sessionId === conv.id
+                        ? "bg-white/[0.06] text-surface-200 font-medium"
+                        : "text-surface-400 hover:bg-white/[0.03] hover:text-surface-300"
+                    )}
+                  >
+                    <div className="flex items-center gap-3 overflow-hidden">
+                      <MessageSquare size={16} className={sessionId === conv.id ? "text-gold-500/70" : "text-surface-500 group-hover:text-surface-400"} />
+                      <span className="truncate">{conv.title}</span>
+                    </div>
+                    <button
+                      onClick={(e) => handleDeleteSession(e, conv.id)}
+                      className="opacity-0 group-hover:opacity-100 p-1 text-surface-500 hover:text-red-400 transition-all"
+                      title="Supprimer la conversation"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Bottom / Documentation */}
+        <div className="p-3 border-t border-white/[0.06]">
+          <Link
+            href="/docs"
+            onClick={onClose}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-surface-400 hover:text-surface-200 hover:bg-white/[0.04] transition-all duration-200 group mb-2"
+          >
+            <BookOpen size={18} className="text-surface-500 group-hover:text-gold-500/70 transition-colors" />
+            <span className="text-sm font-medium">Documentation</span>
+          </Link>
+
+          <div className="card-glass p-3 rounded-xl">
+            <p className="text-[11px] text-surface-500 leading-relaxed">
+              Plateforme IA dédiée au patrimoine béninois.
+            </p>
           </div>
         </div>
       </aside>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { MessageCircle, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import clsx from 'clsx';
 
 interface MessageBubbleProps {
