@@ -18,8 +18,9 @@ TAVILY_KEY=os.getenv('TAVILY_KEY')
 
 COLLECTION_NAME ="wadagni"
 EMBEDDING_MODEL ="sentence-transformers/all-MiniLM-L6-v2"
-GROQ_MODEL_NAME=["gpt-oss-120b", "gpt-oss-20b", "qwen/qwen3-32b"]
-OPENAI_MODEL_NAME=['gpt-5.4', "gpt-5.4-mini", "gpt-5.4-nanoo"]
+GROQ_MODEL_NAME=["llama3-8b-8192", "llama3-70b-8192", "mixtral-8x7b-32768"]
+OPENAI_MODEL_NAME=["gpt-4o", "gpt-4o-mini"]
+OPEN_ROUTER_MODEL = ["deepseek/deepseek-r1", "meta-llama/llama-3.3-70b-instruct"]
 MODEL_AUDIO_TO_TEXT = "whisper-large-v3-turbo"
 
 # =========================
