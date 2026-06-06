@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
   { href: '/chat', label: 'Chat' },
   { href: '/audio', label: 'Audio' },
+  { href: '/diaspora', label: 'Diaspora' },
   { href: '/docs', label: 'Docs' },
 ];
 
@@ -25,10 +26,14 @@ export const Header: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center relative overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, #D4A017 0%, #065f46 100%)' }}
-            >
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="w-9 h-6 rounded overflow-hidden flex shadow-sm border border-white/10 relative group-hover:border-gold-500/30 transition-all duration-300">
+              {/* Green band on left */}
+              <div className="w-[38%] h-full bg-[#059669]" />
+              {/* Yellow and Red on right */}
+              <div className="w-[62%] h-full flex flex-col">
+                <div className="h-1/2 bg-[#D4A017]" />
+                <div className="h-1/2 bg-[#E63946]" />
+              </div>
             </div>
             <span className="font-display font-bold text-lg text-surface-100 group-hover:text-gold-400 transition-colors duration-300">
               AskBenin
@@ -58,7 +63,7 @@ export const Header: React.FC = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Link href="/chat" className="btn-primary text-sm !px-5 !py-2.5">
+            <Link href="/chat" className="inline-flex items-center gap-2 px-5 py-2.5 font-semibold text-sm rounded-xl transition-all duration-300 ease-out active:scale-[0.97] bg-gradient-to-br from-gold-500 to-gold-400 text-surface-950 shadow-[0_4px_16px_rgba(212,160,23,0.3)] hover:shadow-[0_6px_28px_rgba(212,160,23,0.5)] hover:-translate-y-[1px]">
               <MessageSquare size={16} />
               Démarrer le chat
             </Link>
@@ -98,7 +103,7 @@ export const Header: React.FC = () => {
             <div className="pt-2 px-1">
               <Link
                 href="/chat"
-                className="btn-primary w-full justify-center text-sm"
+                className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 font-semibold text-sm rounded-xl transition-all duration-300 ease-out active:scale-[0.97] bg-gradient-to-br from-gold-500 to-gold-400 text-surface-950 shadow-[0_4px_16px_rgba(212,160,23,0.3)] hover:shadow-[0_6px_28px_rgba(212,160,23,0.5)] hover:-translate-y-[1px]"
                 onClick={() => setMobileOpen(false)}
               >
                 <MessageSquare size={16} />

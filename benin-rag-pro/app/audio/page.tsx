@@ -26,12 +26,12 @@ export default function AudioPage() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto text-center space-y-4"
           >
-            <div className="badge mx-auto">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gold-500/10 border border-gold-500/20 text-yellow-300 mx-auto">
               <Headphones size={14} />
               Mode Audio
             </div>
             <h1 className="text-3xl sm:text-5xl font-display font-bold text-surface-100">
-              Interface Audio <span className="gradient-text">Avancée</span>
+              Interface Audio <span className="bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500 bg-clip-text text-transparent">Avancée</span>
             </h1>
             <p className="text-surface-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
               Enregistrez vos questions vocalement et obtenez des réponses instantanées.
@@ -47,7 +47,7 @@ export default function AudioPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="card-glass p-6 sm:p-8"
+              className="p-6 sm:p-8 rounded-2xl transition-all duration-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-[16px] hover:bg-white/[0.06] hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]"
             >
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-gold-500 to-gold-700">
@@ -66,7 +66,7 @@ export default function AudioPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="card-glass p-6 sm:p-8"
+              className="p-6 sm:p-8 rounded-2xl transition-all duration-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-[16px] hover:bg-white/[0.06] hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]"
             >
               <h2 className="text-lg font-display font-bold text-surface-100 mb-6">Contrôles d'Enregistrement</h2>
               <AudioRecorder />
@@ -84,7 +84,7 @@ export default function AudioPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="card-glow p-6 sm:p-8"
+                className="p-6 sm:p-8 rounded-2xl transition-all duration-300 relative overflow-hidden bg-white/[0.03] border border-gold-500/15 hover:border-gold-500/35 hover:shadow-[0_0_30px_rgba(212,160,23,0.08)]"
               >
                 <h2 className="text-lg font-display font-bold text-surface-100 mb-4">Transcription</h2>
                 <p className="text-surface-300 p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/15">
@@ -98,7 +98,7 @@ export default function AudioPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="card-glass p-6 sm:p-8"
+              className="p-6 sm:p-8 rounded-2xl transition-all duration-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-[16px] hover:bg-white/[0.06] hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]"
             >
               <h2 className="text-lg font-display font-bold text-surface-100 mb-5">Comment ça marche ?</h2>
               <div className="space-y-3">
@@ -120,7 +120,7 @@ export default function AudioPage() {
 
             {/* CTA to chat */}
             <div className="text-center pt-4">
-              <Link href="/chat" className="btn-secondary">
+              <Link href="/chat" className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm rounded-xl transition-all duration-300 ease-out active:scale-[0.97] bg-white/5 text-yellow-300 border-[1.5px] border-gold-500/30 backdrop-blur-[8px] hover:bg-gold-500/10 hover:border-gold-500/50">
                 Préférer le mode texte ?
                 <ArrowRight size={16} />
               </Link>

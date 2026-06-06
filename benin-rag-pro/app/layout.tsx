@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import GlobalBackground from "../components/GlobalBackground";
 
 export const metadata: Metadata = {
   title: "AskBenin — Votre Assistant IA sur le Bénin",
@@ -38,7 +39,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="bg-surface-950 text-surface-200 overflow-x-hidden font-sans">
+      <body className="bg-surface-950 text-surface-200 overflow-x-hidden font-sans relative">
+        <GlobalBackground />
         {children}
       </body>
     </html>

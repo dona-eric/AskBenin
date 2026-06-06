@@ -98,7 +98,7 @@ export default function PrivacyPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 viewport={{ once: true }}
-                className="card-glow p-6"
+                className="p-6 rounded-2xl transition-all duration-300 relative overflow-hidden bg-white/[0.03] border border-gold-500/15 hover:border-gold-500/35 hover:shadow-[0_0_30px_rgba(212,160,23,0.08)]"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gold-500/10 border border-gold-500/20">
@@ -127,7 +127,7 @@ export default function PrivacyPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
                 viewport={{ once: true }}
-                className="card-glass p-5 sm:p-6"
+                className="p-5 sm:p-6 rounded-2xl transition-all duration-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-[16px] hover:bg-white/[0.06] hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]"
               >
                 <h3 className="text-lg font-display font-bold text-surface-200 mb-3">{detail.title}</h3>
                 {detail.intro && <p className="text-sm text-surface-400 mb-2">{detail.intro}</p>}
@@ -146,7 +146,7 @@ export default function PrivacyPage() {
             ))}
 
             {/* Contact */}
-            <div className="card-glass p-5 sm:p-6">
+            <div className="p-5 sm:p-6 rounded-2xl transition-all duration-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-[16px] hover:bg-white/[0.06] hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]">
               <h3 className="text-lg font-display font-bold text-surface-200 mb-3">6. Contact</h3>
               <p className="text-sm text-surface-400">
                 Pour toute question concernant cette politique, contactez-nous à{' '}
@@ -158,7 +158,7 @@ export default function PrivacyPage() {
           </motion.div>
 
           {/* Last updated */}
-          <div className="divider" />
+          <div className="h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
           <p className="text-center text-surface-600 text-xs">
             Dernière mise à jour : 2 avril 2026
           </p>

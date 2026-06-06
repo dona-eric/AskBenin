@@ -13,6 +13,7 @@ export const Footer: React.FC = () => {
       links: [
         { label: 'Chat IA', href: '/chat' },
         { label: 'Mode Audio', href: '/audio' },
+        { label: 'Portail Diaspora', href: '/diaspora' },
         { label: 'Documentation', href: '/docs' },
       ],
     },
@@ -41,9 +42,14 @@ export const Footer: React.FC = () => {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #D4A017 0%, #065f46 100%)' }}
-              >
+              <div className="w-9 h-6 rounded overflow-hidden flex shadow-sm border border-white/10 relative">
+                {/* Green band on left */}
+                <div className="w-[38%] h-full bg-[#059669]" />
+                {/* Yellow and Red on right */}
+                <div className="w-[62%] h-full flex flex-col">
+                  <div className="h-1/2 bg-[#D4A017]" />
+                  <div className="h-1/2 bg-[#E63946]" />
+                </div>
               </div>
               <span className="font-display font-bold text-lg text-surface-100">AskBenin</span>
             </div>
@@ -75,7 +81,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Contact row */}
-        <div className="divider mb-8" />
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent mb-8" />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div className="flex items-center gap-3">
             <Mail size={16} className="text-gold-500/60 flex-shrink-0" />
@@ -96,7 +102,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="divider mb-6" />
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent mb-6" />
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-surface-600 text-xs">
             © {currentYear} AskBenin. Tous droits réservés.

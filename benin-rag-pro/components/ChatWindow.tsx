@@ -15,23 +15,37 @@ const SUGGESTIONS = [
 ];
 
 /* ─── Avatar ─── */
-const Avatar = ({ role, loading = false }: { role: string; loading?: boolean }) => (
-  <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center"
-    style={{
-      background: role === 'assistant'
-        ? 'linear-gradient(135deg, #D4A017 0%, #065f46 100%)'
-        : 'linear-gradient(135deg, #475569 0%, #64748b 100%)',
-      boxShadow: role === 'assistant' ? '0 2px 10px rgba(212,160,23,0.25)' : 'none',
-    }}
-  >
-    {loading
-      ? <Loader size={14} className="text-white animate-spin" />
-      : <span className="text-white text-xs font-bold font-display">
-          {role === 'assistant' ? 'A' : 'U'}
-        </span>
-    }
-  </div>
-);
+const Avatar = ({ role, loading = false }: { role: string; loading?: boolean }) => {
+  const isAssistant = role === 'assistant';
+  return (
+    <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center relative overflow-hidden"
+      style={{
+        boxShadow: isAssistant ? '0 2px 10px rgba(212,160,23,0.25)' : 'none',
+      }}
+    >
+      {isAssistant ? (
+        <div className="absolute inset-0 flex">
+          <div className="w-[38%] h-full bg-[#059669]" />
+          <div className="w-[62%] h-full flex flex-col">
+            <div className="h-1/2 bg-[#D4A017]" />
+            <div className="h-1/2 bg-[#E63946]" />
+          </div>
+        </div>
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-surface-600 to-surface-700" />
+      )}
+      <div className="relative z-10 flex items-center justify-center w-full h-full bg-black/10">
+        {loading ? (
+          <Loader size={14} className="text-white animate-spin" />
+        ) : (
+          <span className="text-white text-xs font-bold font-display">
+            {isAssistant ? 'A' : 'U'}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+};
 
 /* ─── Typing indicator ─── */
 const TypingIndicator = () => (
@@ -50,10 +64,15 @@ const TypingIndicator = () => (
 const WelcomeScreen = ({ onSend }: { onSend: (p: string) => void }) => (
   <div className="flex flex-col items-center justify-center h-full px-4 sm:px-6 text-center">
     {/* Logo */}
-    <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 relative"
-      style={{ background: 'linear-gradient(135deg, #D4A017 0%, #065f46 100%)' }}
-    >
-      <div className="absolute inset-0 rounded-2xl animate-glow-pulse" />
+    <div className="w-20 h-13 rounded-xl overflow-hidden flex shadow-lg border border-white/10 relative mb-6">
+      <div className="absolute inset-0 rounded-xl animate-glow-pulse pointer-events-none" />
+      {/* Green band on left */}
+      <div className="w-[38%] h-full bg-[#059669]" />
+      {/* Yellow and Red on right */}
+      <div className="w-[62%] h-full flex flex-col">
+        <div className="h-1/2 bg-[#D4A017]" />
+        <div className="h-1/2 bg-[#E63946]" />
+      </div>
     </div>
 
     <h1 className="text-2xl sm:text-3xl font-display font-bold text-surface-100 mb-2">
@@ -70,7 +89,7 @@ const WelcomeScreen = ({ onSend }: { onSend: (p: string) => void }) => (
         <button
           key={prompt}
           onClick={() => onSend(prompt)}
-          className="card-glass p-4 text-left group cursor-pointer hover:border-gold-500/30 transition-all duration-300"
+          className="p-4 rounded-2xl transition-all duration-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-[16px] hover:bg-white/[0.06] hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)] text-left group cursor-pointer hover:border-gold-500/30"
         >
           <div className="flex items-center gap-3 mb-2">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center"
@@ -112,7 +131,7 @@ const MessageItem = ({ message }: { message: any }) => {
           <div className="flex flex-wrap gap-2 mt-2">
             {message.sources.map((src: string, i: number) => (
               <a key={i} href={src} target="_blank" rel="noreferrer"
-                className="badge-green hover:bg-emerald-500/20 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 hover:bg-emerald-500/20 transition-colors"
               >
                 <MapPin size={10} /> Source {i + 1}
               </a>
@@ -124,7 +143,7 @@ const MessageItem = ({ message }: { message: any }) => {
   );
 };
 
-/* ═══ ChatWindow ═══ */
+/* ══─ ChatWindow ══─ */
 export const ChatWindow = () => {
   const { messages, isLoading, sessionId, error, addMessage, setLoading, setError } = useChatStore();
   const [inputValue, setInputValue] = useState('');
@@ -229,7 +248,7 @@ export const ChatWindow = () => {
               <div className="px-4 sm:px-6 py-2 animate-fade-in">
                 <div className="flex items-center gap-3 p-3 rounded-xl bg-accent-500/10 border border-accent-500/20">
                   <span className="text-accent-400 text-sm flex-1">{error}</span>
-                  <button onClick={handleRetry} className="btn-ghost !text-accent-400 !p-2">
+                  <button onClick={handleRetry} className="inline-flex items-center gap-2 px-4 py-2.5 font-medium text-sm rounded-xl transition-all duration-200 text-surface-400 hover:bg-white/[0.06] hover:text-surface-200 !text-accent-400 !p-2">
                     <RotateCcw size={14} />
                   </button>
                 </div>

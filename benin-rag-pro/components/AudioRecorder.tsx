@@ -97,7 +97,7 @@ export const AudioRecorder: React.FC = () => {
               'px-5 sm:px-6 py-3 rounded-full font-semibold flex items-center gap-2.5 transition-all duration-300 text-sm',
               isRecording
                 ? 'bg-accent-500 hover:bg-accent-600 text-white shadow-lg shadow-accent-500/25 animate-pulse-slow'
-                : 'btn-green !rounded-full'
+                : 'inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm rounded-full transition-all duration-300 ease-out active:scale-[0.97] bg-gradient-to-br from-emerald-800 to-emerald-500 text-white shadow-[0_4px_16px_rgba(16,185,129,0.25)] hover:shadow-[0_6px_28px_rgba(16,185,129,0.45)] hover:-translate-y-[1px]'
             )}
           >
             {isRecording ? (
@@ -117,7 +117,7 @@ export const AudioRecorder: React.FC = () => {
           <>
             <button
               onClick={togglePlayback}
-              className="px-4 py-3 rounded-full font-semibold flex items-center gap-2 text-sm btn-primary !rounded-full"
+              className="inline-flex items-center gap-2 px-5 py-3 font-semibold text-sm rounded-full transition-all duration-300 ease-out active:scale-[0.97] bg-gradient-to-br from-gold-500 to-gold-400 text-surface-950 shadow-[0_4px_16px_rgba(212,160,23,0.3)] hover:shadow-[0_6px_28px_rgba(212,160,23,0.5)] hover:-translate-y-[1px]"
             >
               {isPlaying ? <Pause size={16} /> : <Play size={16} />}
               <span className="hidden sm:inline">{isPlaying ? 'Pause' : 'Écouter'}</span>
@@ -130,7 +130,7 @@ export const AudioRecorder: React.FC = () => {
                 'p-3 rounded-full font-semibold transition-all flex items-center justify-center',
                 isTranscribing
                   ? 'bg-surface-700 text-surface-500 cursor-not-allowed'
-                  : 'btn-green !rounded-full !p-3'
+                  : 'inline-flex items-center justify-center p-3 font-semibold text-sm rounded-full transition-all duration-300 ease-out active:scale-[0.97] bg-gradient-to-br from-emerald-800 to-emerald-500 text-white shadow-[0_4px_16px_rgba(16,185,129,0.25)] hover:shadow-[0_6px_28px_rgba(16,185,129,0.45)] hover:-translate-y-[1px]'
               )}
               title={isTranscribing ? 'Transcription...' : 'Transcrire & Envoyer'}
             >

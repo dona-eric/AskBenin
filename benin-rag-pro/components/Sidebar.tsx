@@ -54,9 +54,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{ background: 'linear-gradient(135deg, #D4A017, #065f46)' }}
-            >
+            <div className="w-8 h-5.5 rounded overflow-hidden flex shadow-sm border border-white/10 relative">
+              {/* Green band on left */}
+              <div className="w-[38%] h-full bg-[#059669]" />
+              {/* Yellow and Red on right */}
+              <div className="w-[62%] h-full flex flex-col">
+                <div className="h-1/2 bg-[#D4A017]" />
+                <div className="h-1/2 bg-[#E63946]" />
+              </div>
             </div>
             <span className="font-display font-bold text-surface-200 text-sm">AskBenin</span>
           </div>
@@ -124,7 +129,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             <span className="text-sm font-medium">Documentation</span>
           </Link>
 
-          <div className="card-glass p-3 rounded-xl">
+          <div className="p-3 rounded-xl transition-all duration-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-[16px] hover:bg-white/[0.06] hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]">
             <p className="text-[11px] text-surface-500 leading-relaxed">
               Plateforme IA dédiée au patrimoine béninois.
             </p>

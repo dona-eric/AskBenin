@@ -72,7 +72,7 @@ export default function DocsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 viewport={{ once: true }}
-                className="card-glow p-6 sm:p-8"
+                className="p-6 sm:p-8 rounded-2xl transition-all duration-300 relative overflow-hidden bg-white/[0.03] border border-gold-500/15 hover:border-gold-500/35 hover:shadow-[0_0_30px_rgba(212,160,23,0.08)]"
               >
                 <div className="flex items-center gap-4 mb-5">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-gold-500 to-gold-700">
@@ -118,7 +118,7 @@ export default function DocsPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 viewport={{ once: true }}
-                className="card-glass p-5 sm:p-6"
+                className="p-5 sm:p-6 rounded-2xl transition-all duration-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-[16px] hover:bg-white/[0.06] hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]"
               >
                 <h3 className="text-base font-semibold text-surface-200 mb-2">{faq.q}</h3>
                 <p className="text-sm text-surface-400 leading-relaxed">{faq.a}</p>

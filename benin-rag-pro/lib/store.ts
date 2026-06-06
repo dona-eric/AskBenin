@@ -39,7 +39,7 @@ export const useChatStore = create<ChatState & {
   newSession: () => void;
   loadSession: (sessionId: string) => void;
   deleteSession: (sessionId: string) => void;
-}>((set, get) => {
+}>((set) => {
   const initialSessionId = generateSessionId();
   return {
     conversations: getInitialConversations(),
