@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
   { href: '/chat', label: 'Chat' },
   { href: '/audio', label: 'Audio' },
+  { href: '/patrimoine', label: 'Patrimoine' },
   { href: '/diaspora', label: 'Diaspora' },
   { href: '/docs', label: 'Docs' },
 ];

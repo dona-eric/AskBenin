@@ -13,6 +13,7 @@ export const Footer: React.FC = () => {
       links: [
         { label: 'Chat IA', href: '/chat' },
         { label: 'Mode Audio', href: '/audio' },
+        { label: 'Patrimoine 3D', href: '/patrimoine' },
         { label: 'Portail Diaspora', href: '/diaspora' },
         { label: 'Documentation', href: '/docs' },
       ],
