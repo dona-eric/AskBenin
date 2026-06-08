@@ -3,7 +3,7 @@ import "./globals.css";
 import GlobalBackground from "../components/GlobalBackground";
 
 export const metadata: Metadata = {
-  title: "AskBenin — Votre Assistant IA sur le Bénin",
+  title: "AskBenin: Votre Assistant IA sur le Bénin",
   description:
     "Explorez le patrimoine, la culture, l'économie et les traditions béninoises à travers une plateforme d'intelligence artificielle moderne et accessible.",
   keywords: [
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Chat IA", "Agent IA", "Afrique", "AskBenin",
   ],
   openGraph: {
-    title: "AskBenin — Votre Assistant IA sur le Bénin",
+    title: "AskBenin - Votre Assistant IA sur le Bénin",
     description: "Découvrez le Bénin à travers l'intelligence artificielle",
     type: "website",
   },

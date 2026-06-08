@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="border-t border-white/[0.06] bg-surface-950">
+    <footer className="bg-surface-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           {/* Brand */}
@@ -81,28 +81,28 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Contact row */}
-        <div className="h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent mb-8" />
+        <div className="h-[1px] bg-gradient-to-r from-transparent to-transparent mb-8" />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div className="flex items-center gap-3">
-            <Mail size={16} className="text-gold-500/60 flex-shrink-0" />
+            <Mail size={20} className="text-gold-500/60 flex-shrink-0" />
             <a href="mailto:contact@askbenin.com" className="text-surface-400 hover:text-gold-400 text-sm transition-colors">
               contact@askbenin.com
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <Phone size={14} className="text-gold-500/60 flex-shrink-0" />
+            <Phone size={20} className="text-gold-500/60 flex-shrink-0" />
             <a href="tel:+2290141730240" className="text-surface-400 hover:text-gold-400 text-sm transition-colors">
               +229 0141 7302 40
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <MapPin size={14} className="text-gold-500/60 flex-shrink-0" />
+            <MapPin size={20} className="text-gold-500/60 flex-shrink-0" />
             <span className="text-surface-400 text-sm">Cotonou, Bénin</span>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent mb-6" />
+        <div className="h-[1px] bg-gradient-to-r from-transparent to-transparent mb-6" />
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-surface-600 text-xs">
             © {currentYear} AskBenin. Tous droits réservés.

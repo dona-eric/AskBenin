@@ -2,11 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Globe, ShieldCheck, Briefcase, FileText,
-  CreditCard, MapPin, Phone, Mail, ArrowRight,
-  MessageSquare, ExternalLink, ChevronDown, ChevronUp, Info
-} from 'lucide-react';
+import {Globe, ShieldCheck, Briefcase, FileText, CreditCard, MapPin, Phone, Mail, ArrowRight, MessageSquare, ExternalLink, ChevronDown, ChevronUp, Info} from 'lucide-react';
 import { Header } from '@components/Header';
 import { Footer } from '@components/Footer';
 import Link from 'next/link';
@@ -273,7 +269,7 @@ export default function DiasporaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface-950 relative overflow-hidden">
+    <div className="min-h-screen bg-transparent relative overflow-hidden">
       <Header />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
@@ -353,7 +349,7 @@ export default function DiasporaPage() {
         </section>
 
         {/* ═══ INTERACTIVE CONSULAR GUIDES ═══ */}
-        <section id="consular" className="py-12 border-t border-white/[0.04]">
+        <section id="consular" className="py-12 ">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-4xl font-display font-bold text-surface-100 mb-3">
               Guides Consulaires & Démarches
@@ -467,7 +463,7 @@ export default function DiasporaPage() {
         </section>
 
         {/* ═══ INVESTMENT & SECURED REAL ESTATE ═══ */}
-        <section className="py-16 border-t border-white/[0.04]">
+        <section className="py-16">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-4xl font-display font-bold text-surface-100 mb-3">
               Investissement & Foncier Sécurisé
@@ -530,7 +526,7 @@ export default function DiasporaPage() {
         </section>
 
         {/* ═══ GOVERNMENT SERVICES & PORTALS ═══ */}
-        <section className="py-16 border-t border-white/[0.04]">
+        <section className="py-16">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-4xl font-display font-bold text-surface-100 mb-3">
               Portails & Services Officiels de l'État
@@ -580,7 +576,7 @@ export default function DiasporaPage() {
         </section>
 
         {/* ═══ CONSULAR & EMBASSY DIRECTORY ═══ */}
-        <section className="py-16 border-t border-white/[0.04]">
+        <section className="py-16">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <h2 className="text-2xl sm:text-4xl font-display font-bold text-surface-100 mb-3">
@@ -676,7 +672,7 @@ export default function DiasporaPage() {
         </section>
 
         {/* ═══ QUICK CHAT / PROMPTS ═══ */}
-        <section className="py-12 border-t border-white/[0.04]">
+        <section className="py-12">
           <div className="rounded-3xl p-8 sm:p-12 md:p-16 text-center relative overflow-hidden transition-all duration-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-[16px] hover:bg-white/[0.06] hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]"
             style={{ background: 'linear-gradient(135deg, #064e3b 0%, #047857 50%, #D4A017 100%)' }}
           >

@@ -6,7 +6,7 @@ import { Home, MessageSquare } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-surface-950 flex items-center justify-center px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-transparent flex items-center justify-center px-4 relative overflow-hidden">
       {/* Background orbs */}
       <div className="orb orb-gold w-[300px] h-[300px] top-1/4 -right-20" />
       <div className="orb orb-green w-[250px] h-[250px] bottom-1/4 -left-20" />

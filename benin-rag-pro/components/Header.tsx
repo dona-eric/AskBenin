@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.06]"
+    <header className="sticky top-0 z-50"
       style={{ background: 'rgba(8, 13, 25, 0.8)', backdropFilter: 'blur(20px) saturate(180%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">

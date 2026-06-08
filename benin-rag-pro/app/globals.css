@@ -20,7 +20,7 @@ html {
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: #080d19;
-  color: #e2e8f0;
+  color: #ccd5e0;
   overflow-x: hidden;
   padding-bottom: env(safe-area-inset-bottom);
 }

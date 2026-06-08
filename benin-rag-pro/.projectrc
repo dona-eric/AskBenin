@@ -1,8 +1,8 @@
 {
   "name": "AskBenin",
   "description": "Plateforme d'IA RAG Agentic pour la communauté béninoise",
-  "author": "Donerick Wadagni",
-  "repository": "https://github.com/donerick/askbenin",
+  "author": "Dona Eric",
+  "repository": "https://github.com/askbenin.git",
   "license": "MIT",
   "version": "2.0.0",
   "keywords": [

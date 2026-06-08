@@ -55,7 +55,7 @@ const DETAILS = [
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-surface-950">
+    <div className="min-h-screen bg-transparent">
       <Header />
 
       <div className="relative z-10">

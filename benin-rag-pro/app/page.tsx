@@ -3,10 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  ArrowRight, Mic, MessageSquare, Globe,
-  Brain, Zap, Shield, History, Calendar, X, Eye
-} from 'lucide-react';
+import {ArrowRight, Mic, MessageSquare, Globe,Brain, Zap, Shield, History, Calendar, X, Eye} from 'lucide-react';
 import { Header } from '@components/Header';
 import { Footer } from '@components/Footer';
 
@@ -74,20 +71,38 @@ const STATS = [
 
 const HISTORY_ERAS = [
   {
-    id: 'era_2026_future',
-    title: '2026 et Au-delà : L\'Ère de l\'Unité et du Progrès',
-    subtitle: 'Investiture de Romuald COSSI MBOEKE WADAGNI & dynamique "Plus loin, Ensemble"',
-    narrative: 'Le 25 mai 2026 marque un tournant historique pour le Bénin. Le nouveau président Romuald COSSI MBOEKE WADAGNI entre en fonction, succédant à Patrice Talon. Porté par la vision directrice "Plus loin, Ensemble", son gouvernement s\'engage à consolider les acquis de la Rupture tout en inaugurant une ère de développement inclusif, de concertation nationale et de progrès partagé. C\'est l\'aube d\'un avenir collectif renforcé, où la jeunesse, l\'innovation technologique et l\'unité sociale sont au cœur des ambitions étatiques.',
+    id: 'era_before_1960',
+    title: 'Avant 1960 : Royaumes, Gloire & Résistance',
+    subtitle: 'Le temps des grands empires et des héros nationaux contre l\'impérialisme',
+    narrative: 'Avant la colonisation française, le Dahomey était une mosaïque de royaumes puissants et florissants, notamment les royaumes d\'Abomey, de Nikki, de Hogbonou (Porto-Novo) et d\'Allada. Ces entités possédaient une organisation sociale, militaire et artistique sophistiquée. Face à la pénétration coloniale à la fin du XIXe siècle, la résistance s\'organise. Le Roi Béhanzin d\'Abomey livre des batailles héroïques, tandis que dans le nord, le prince wassangari Bio Guéra s\'oppose farouchement à l\'oppresseur colonial lors des révoltes de 1915-1917, inscrivant leurs noms au panthéon de la liberté.',
     events: [
-      '25 Mai 2026 : Prestation de serment solennelle du Président Romuald COSSI MBOEKE WADAGNI',
-      'Formation du gouvernement de transition et d\'unité nationale sous le crédo "Plus loin, Ensemble"',
-      'Lancement de chantiers axés sur l\'inclusion sociale, l\'économie numérique et la durabilité',
-      'Consolidation du leadership du Bénin au sein des instances ouest-africaines et internationales'
+      'Royaumes souverains d\'Abomey, de Nikki et d\'Allada dotés d\'armées hautement structurées',
+      'Guerres de résistance menées par le Roi Béhanzin d\'Abomey contre les troupes du Général Dodds',
+      'Soulèvement héroïque de Bio Guéra (1915-1917) contre le recrutement forcé dans le Nord',
+      'Rôle déterminant des Agodjié (les Amazones de Dahomey) dans la préservation du territoire'
     ],
     images: [
-      { src: '/images/Romuald-Wadagni.webp', title: 'Président Romuald Wadagni', desc: 'Portrait officiel du Président Romuald COSSI MBOEKE WADAGNI, incarnant le renouveau générationnel, la rigueur technique et la vision d\'un Bénin prospère et uni.' },
-      { src: '/images/Wadagni-1.webp', title: 'Plus Loin, Ensemble', desc: 'Le Président lors de sa présentation de politique générale, axée sur la cohésion nationale, la modernisation des services publics et l\'éducation.' },
-      { src: '/images/en-2026-non-retour.jpeg', title: '2026 : Ancrage & Ouverture', desc: 'Inauguration des aménagements touristiques modernisés de la Porte du Non-Retour, alliant mémoire historique et attractivité internationale.' }
+      { src: '/images/before_1960.jpg', title: 'Résistance de Béhanzin', desc: 'Représentation picturale de la résistance des armées d\'Abomey face à la supériorité technique des forces coloniales.' },
+      { src: '/images/guerra_bio.jpg', title: 'Statue de Bio Guéra', desc: 'Monument érigé en hommage à Bio Guéra, symbole intemporel de la résistance nationale à l\'occupation étrangère.' },
+      { src: '/images/bio_guerra.jpeg', title: 'Le Prince Guerrier Bio Guéra', desc: 'Illustration du chef de guerre Bio Guéra à cheval, menant ses cavaliers lors des soulèvements de Nikki.' },
+      { src: '/images/royal-palace-of-allada.jpg', title: 'Palais d\'Allada', desc: 'Vue du palais royal d\'Allada, berceau dynastique des fondateurs des royaumes du Sud-Bénin.' }
+    ]
+  },
+  {
+    id: 'era_1960_2016',
+    title: '1960 - 2016 : Souveraineté & Démocratie',
+    subtitle: 'De l\'indépendance du Dahomey au modèle démocratique de la Conférence nationale',
+    narrative: 'Le 1er août 1960, le Dahomey accède à l\'indépendance. Les premières années sont marquées par l\'instabilité politique jusqu\'en 1972, date à laquelle le Général Mathieu Kérékou prend le pouvoir et instaure un régime marxiste-léniniste sous le nom de République Populaire du Bénin en 1975. Face à la crise, le Bénin organise en février 1990 la Conférence des Forces Vives de la Nation, un coup de génie politique pacifique qui instaure le multipartisme. Les alternances démocratiques exemplaires sous Nicéphore Soglo, Mathieu Kérékou et Yayi Boni consacrent le Bénin comme laboratoire de la démocratie en Afrique.',
+    events: [
+      '1er Août 1960 : Proclamation de l\'indépendance nationale par le président Hubert Maga',
+      '30 Novembre 1975 : Proclamation de la République Populaire du Bénin sous le régime de Mathieu Kérékou',
+      'Février 1990 : Conférence des Forces Vives de la Nation, transition pacifique historique',
+      'Alternances démocratiques régulières et consolidation des libertés publiques de 1991 à 2016'
+    ],
+    images: [
+      { src: '/images/independance_benin.jpeg', title: '1er Août 1960', desc: 'Célébrations officielles et joie populaire lors de la proclamation d\'indépendance de la République du Dahomey.' },
+      { src: '/images/congres.jpg', title: 'Palais des Congrès', desc: 'Le Palais des Congrès de Cotonou, théâtre des débats démocratiques et des assemblées constituantes de la période post-1990.' },
+      { src: '/images/images.jpeg', title: 'Transition Pacifique', desc: 'Archives historiques illustrant la cohabitation pacifique et la réconciliation politique nationale des années 1990.' }
     ]
   },
   {
@@ -111,41 +126,24 @@ const HISTORY_ERAS = [
     ]
   },
   {
-    id: 'era_1960_2016',
-    title: '1960 - 2016 : Souveraineté & Démocratie',
-    subtitle: 'De l\'indépendance du Dahomey au modèle démocratique de la Conférence nationale',
-    narrative: 'Le 1er août 1960, le Dahomey accède à l\'indépendance. Les premières années sont marquées par l\'instabilité politique jusqu\'en 1972, date à laquelle le Général Mathieu Kérékou prend le pouvoir et instaure un régime marxiste-léniniste sous le nom de République Populaire du Bénin en 1975. Face à la crise, le Bénin organise en février 1990 la Conférence des Forces Vives de la Nation, un coup de génie politique pacifique qui instaure le multipartisme. Les alternances démocratiques exemplaires sous Nicéphore Soglo, Mathieu Kérékou et Yayi Boni consacrent le Bénin comme laboratoire de la démocratie en Afrique.',
+    id: 'era_2026_future',
+    title: '2026 et Au-delà : L\'Ère de l\'Unité et du Progrès',
+    subtitle: 'Investiture de Romuald COSSI MBOEKE WADAGNI & dynamique "Plus loin, Ensemble"',
+    narrative: 'Le 25 mai 2026 marque un tournant historique pour le Bénin. Le nouveau président Romuald COSSI MBOEKE WADAGNI entre en fonction, succédant à Patrice Talon. Porté par la vision directrice "Plus loin, Ensemble", son gouvernement s\'engage à consolider les acquis de la Rupture tout en inaugurant une ère de développement inclusif, de concertation nationale et de progrès partagé. C\'est l\'aube d\'un avenir collectif renforcé, où la jeunesse, l\'innovation technologique et l\'unité sociale sont au cœur des ambitions étatiques.',
     events: [
-      '1er Août 1960 : Proclamation de l\'indépendance nationale par le président Hubert Maga',
-      '30 Novembre 1975 : Proclamation de la République Populaire du Bénin sous le régime de Mathieu Kérékou',
-      'Février 1990 : Conférence des Forces Vives de la Nation, transition pacifique historique',
-      'Alternances démocratiques régulières et consolidation des libertés publiques de 1991 à 2016'
+      '25 Mai 2026 : Prestation de serment solennelle du Président Romuald COSSI MBOEKE WADAGNI',
+      'Formation du gouvernement de transition et d\'unité nationale sous le crédo "Plus loin, Ensemble"',
+      'Lancement de chantiers axés sur l\'inclusion sociale, l\'économie numérique et la durabilité',
+      'Consolidation du leadership du Bénin au sein des instances ouest-africaines et internationales'
     ],
     images: [
-      { src: '/images/independance_benin.jpeg', title: '1er Août 1960', desc: 'Célébrations officielles et joie populaire lors de la proclamation d\'indépendance de la République du Dahomey.' },
-      { src: '/images/congres.jpg', title: 'Palais des Congrès', desc: 'Le Palais des Congrès de Cotonou, théâtre des débats démocratiques et des assemblées constituantes de la période post-1990.' },
-      { src: '/images/images.jpeg', title: 'Transition Pacifique', desc: 'Archives historiques illustrant la cohabitation pacifique et la réconciliation politique nationale des années 1990.' }
+      { src: '/images/Romuald-Wadagni.webp', title: 'Président Romuald Wadagni', desc: 'Portrait officiel du Président Romuald COSSI MBOEKE WADAGNI, incarnant le renouveau générationnel, la rigueur technique et la vision d\'un Bénin prospère et uni.' },
+      { src: '/images/Wadagni-1.webp', title: 'Plus Loin, Ensemble', desc: 'Le Président lors de sa présentation de politique générale, axée sur la cohésion nationale, la modernisation des services publics et l\'éducation.' },
+      { src: '/images/en-2026-non-retour.jpeg', title: '2026 : Ancrage & Ouverture', desc: 'Inauguration des aménagements touristiques modernisés de la Porte du Non-Retour, alliant mémoire historique et attractivité internationale.' }
     ]
   },
-  {
-    id: 'era_before_1960',
-    title: 'Avant 1960 : Royaumes, Gloire & Résistance',
-    subtitle: 'Le temps des grands empires et des héros nationaux contre l\'impérialisme',
-    narrative: 'Avant la colonisation française, le Dahomey était une mosaïque de royaumes puissants et florissants, notamment les royaumes d\'Abomey, de Nikki, de Hogbonou (Porto-Novo) et d\'Allada. Ces entités possédaient une organisation sociale, militaire et artistique sophistiquée. Face à la pénétration coloniale à la fin du XIXe siècle, la résistance s\'organise. Le Roi Béhanzin d\'Abomey livre des batailles héroïques, tandis que dans le nord, le prince wassangari Bio Guéra s\'oppose farouchement à l\'oppresseur colonial lors des révoltes de 1915-1917, inscrivant leurs noms au panthéon de la liberté.',
-    events: [
-      'Royaumes souverains d\'Abomey, de Nikki et d\'Allada dotés d\'armées hautement structurées',
-      'Guerres de résistance menées par le Roi Béhanzin d\'Abomey contre les troupes du Général Dodds',
-      'Soulèvement héroïque de Bio Guéra (1915-1917) contre le recrutement forcé dans le Nord',
-      'Rôle déterminant des Agodjié (les Amazones de Dahomey) dans la préservation du territoire'
-    ],
-    images: [
-      { src: '/images/before_1960.jpg', title: 'Résistance de Béhanzin', desc: 'Représentation picturale de la résistance des armées d\'Abomey face à la supériorité technique des forces coloniales.' },
-      { src: '/images/guerra_bio.jpg', title: 'Statue de Bio Guéra', desc: 'Monument érigé en hommage à Bio Guéra, symbole intemporel de la résistance nationale à l\'occupation étrangère.' },
-      { src: '/images/bio_guerra.jpeg', title: 'Le Prince Guerrier Bio Guéra', desc: 'Illustration du chef de guerre Bio Guéra à cheval, menant ses cavaliers lors des soulèvements de Nikki.' },
-      { src: '/images/royal-palace-of-allada.jpg', title: 'Palais d\'Allada', desc: 'Vue du palais royal d\'Allada, berceau dynastique des fondateurs des royaumes du Sud-Bénin.' }
-    ]
-  }
 ];
+
 
 export default function HomePage() {
   const [wordIdx, setWordIdx] = useState(0);
@@ -160,7 +158,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-surface-950 relative overflow-x-hidden">
+    <div className="min-h-screen bg-transparent relative overflow-x-hidden">
       <Header />
 
       <div className="relative z-10">
@@ -179,17 +177,13 @@ export default function HomePage() {
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold leading-[1.08] text-surface-100"
-              >
+                animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold leading-[1.08] text-surface-100">
                 Découvrez
                 <br />
                 <span className="bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500 bg-clip-text text-transparent" key={wordIdx}>
                   {ROTATING_WORDS[wordIdx]}
                 </span>
-                <br />
-                du Bénin
+                <br/> de notre cher pays le Bénin.
               </motion.h1>
 
               <motion.p
@@ -268,7 +262,7 @@ export default function HomePage() {
         </section>
 
         {/* ═══ BENIN HISTORICAL TIMELINE ═══ */}
-        <section className="py-16 sm:py-24 border-t border-b border-white/[0.04] bg-white/[0.01] relative">
+        <section className="py-16 sm:py-24 bg-white/[0.01] relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             
             {/* Header */}
@@ -292,26 +286,22 @@ export default function HomePage() {
             </motion.div>
 
             {/* Exploration Guideline Indicator */}
-            <div className="hidden md:flex justify-center items-center gap-4 text-xs font-semibold text-surface-400 mb-8 border-b border-white/[0.04] pb-6 max-w-4xl mx-auto">
-              <span className="text-gold-400 flex items-center gap-1.5 shrink-0">
-                <History className="w-3.5 h-3.5" />
-                Exploration Rétrospective :
-              </span>
+            <div className="hidden md:flex justify-center items-center gap-4 text-xs font-semibold text-surface-400 mb-8 pb-6 max-w-4xl mx-auto">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${selectedEra === 'era_2026_future' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-glow-emerald' : 'text-surface-500 border border-transparent'}`}>
-                  Aujourd'hui & Futur (2026+)
+                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${selectedEra === 'era_before_1960' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-glow-emerald' : 'text-surface-500 border border-transparent'}`}>
+                  Les Origines (Avant 1960)
                 </span>
-                <ArrowRight className="w-3 h-3 text-surface-600" />
-                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${selectedEra === 'era_2016_2026' ? 'bg-gold-500/10 text-gold-400 border border-gold-500/30 shadow-glow-gold' : 'text-surface-500 border border-transparent'}`}>
+                <ArrowRight className="w-4 h-4 text-surface-600" />
+                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${selectedEra === 'era_1960_2016' ? 'bg-gold-500/10 text-gold-400 border border-gold-500/30 shadow-glow-gold' : 'text-surface-500 border border-transparent'}`}>
+                   Souveraineté & Démocratie (1960-2016)
+                </span>
+                <ArrowRight className="w-4 h-4 text-surface-600" />
+                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${selectedEra === 'era_2016_2026' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 shadow-glow-yellow' : 'text-surface-500 border border-transparent'}`}>
                   La Rupture & Renaissance (2016-2026)
                 </span>
-                <ArrowRight className="w-3 h-3 text-surface-600" />
-                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${selectedEra === 'era_1960_2016' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 shadow-glow-yellow' : 'text-surface-500 border border-transparent'}`}>
-                  Souveraineté & Démocratie (1960-2016)
-                </span>
-                <ArrowRight className="w-3 h-3 text-surface-600" />
-                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${selectedEra === 'era_before_1960' ? 'bg-red-500/10 text-red-400 border border-red-500/30 shadow-glow-red' : 'text-surface-500 border border-transparent'}`}>
-                  Les Origines (Avant 1960)
+                <ArrowRight className="w-4 h-4 text-surface-600" />
+                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${selectedEra === 'era_2026_future' ? 'bg-red-500/10 text-red-400 border border-red-500/30 shadow-glow-red' : 'text-surface-500 border border-transparent'}`}>
+                  2026 + & Futur
                 </span>
               </div>
             </div>
@@ -331,10 +321,10 @@ export default function HomePage() {
                     }`}
                   >
                     <Calendar className={`w-4 h-4 ${isActive ? 'text-surface-950' : 'text-gold-400'}`} />
-                    {era.id === 'era_2026_future' && '2026 et au-delà'}
-                    {era.id === 'era_2016_2026' && '2016 - 2026'}
-                    {era.id === 'era_1960_2016' && '1960 - 2016'}
                     {era.id === 'era_before_1960' && 'Avant 1960'}
+                    {era.id === 'era_1960_2016' && '1960 - 2016'}
+                    {era.id === 'era_2016_2026' && '2016 - 2026'}
+                    {era.id === 'era_2026_future' && '2026 et au-delà'}
                   </button>
                 );
               })}
@@ -362,10 +352,10 @@ export default function HomePage() {
                           era.id === 'era_2016_2026' ? 'text-gold-400' :
                           era.id === 'era_1960_2016' ? 'text-yellow-400' : 'text-red-400'
                         }`}>
-                          {era.id === 'era_2026_future' && 'L\'Ère Actuelle & Le Futur'}
-                          {era.id === 'era_2016_2026' && 'La Rupture & Renaissance'}
-                          {era.id === 'era_1960_2016' && 'Souveraineté & Démocratie'}
                           {era.id === 'era_before_1960' && 'Les Royaumes & La Résistance'}
+                          {era.id === 'era_1960_2016' && 'Souveraineté & Démocratie'}
+                          {era.id === 'era_2016_2026' && 'La Rupture & Renaissance'}
+                          {era.id === 'era_2026_future' && 'L\'Ère Actuelle & Le Futur'}
                         </span>
                         <h3 className="text-2xl sm:text-3xl font-display font-bold text-surface-100">
                           {era.title}
